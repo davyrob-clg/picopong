@@ -26,11 +26,11 @@ button_b = machine.Pin(13, machine.Pin.IN, machine.Pin.PULL_UP)  # down
 paddle_w = 5
 paddle_h = 40
 
-player_x = 10
+player_x = 0
 player_y = HEIGHT // 2 - paddle_h // 2
 player_speed = 10
 
-ai_x = WIDTH - 10 - paddle_w
+ai_x = WIDTH - paddle_w
 ai_y = HEIGHT // 2 - paddle_h // 2
 ai_speed = 10  # difficulty
 
@@ -130,6 +130,8 @@ def end_game_check():
     global score2
     global highscore
     
+    return
+    
     if score1 > 11 or score2 > 11 :
                 
         if score1 > highscore:
@@ -188,8 +190,10 @@ while True:
     # -------------------------
     # Ball movement
     # -------------------------
-    print(f"Ball X: {ball_dx:.2f}")
-    print(f"Ball Y: {ball_dy:.2f}")
+    print(f"Ball DX: {ball_dx:.2f}")
+    print(f"Ball DY: {ball_dy:.2f}")
+    print(f"Ball X: {ball_x:.2f}")
+    print(f"Ball Y: {ball_y:.2f}")
     ball_x += ball_dx
     ball_y += ball_dy
 
@@ -202,8 +206,8 @@ while True:
     player_collision_detected  = circle_rectangle_collision(ball_x, ball_y, ball_size, player_x, player_y, paddle_w, paddle_h)
     ai_collision_detected  = circle_rectangle_collision(ball_x, ball_y, ball_size, ai_x, ai_y, paddle_w, paddle_h)
 
-    print(f"Ball X: {ball_dx:.2f}")
-    print(f"Ball Y: {ball_dy:.2f}")
+    #print(f"Ball X: {ball_dx:.2f}")
+    #print(f"Ball Y: {ball_dy:.2f}")
 
 
    # print(f"Ball X: {ball_x:.2f}")
@@ -215,14 +219,6 @@ while True:
 
     if (player_collision_detected):
         #print(f"Player Collision detected: {player_collision_detected}")
-        ball_dx = -ball_dx
-        
-
-    
-    if (player_x < ball_x < player_x + paddle_w and
-        player_y < ball_y + ball_size and
-        ball_y < player_y + paddle_h):
-        print(f"Player Collision: {ball_x:.2f}")
         ball_dx = -ball_dx
         
 
